@@ -6,7 +6,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 export default defineEventHandler(async (event) => {
-    const allDataFilePath = path.resolve( __dirname, "../public/alldata.json" );
+    const allDataFilePath = path.resolve( __dirname, "../../public/alldata.json" );
 
     // if (event.req.method === 'GET') {
     //   return getAllData();
