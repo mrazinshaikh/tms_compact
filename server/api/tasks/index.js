@@ -1,5 +1,3 @@
-// if (event.req.method === 'GET') {
-
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -16,9 +14,6 @@ export default defineEventHandler(async (event) => {
 
     if(event.node.req.method === 'POST'){
       const body = await readBody(event)
-      console.log('%cPOST METHODDDDDDD ========', 'color: #00ff00;font-size: 20px;');
-      console.log(body.task_logs);
-      // return body;
       const rsp = new Promise((resolve, reject) => {
         fs.writeFile(allDataFilePath, JSON.stringify(body, null, 2), (err) => {
           if (err) {
