@@ -7,10 +7,17 @@ const __dirname = dirname(__filename);
 
 export default defineEventHandler(async (event) => {
     // const allDataFilePath = path.resolve( __dirname, "../../public/alldata.json" );
-    const allDataFilePath = path.resolve( __dirname, "../public/alldata.json" );
+    // const allDataFilePath = path.resolve( __dirname, "../public/alldata.json" );
+    const allDataFilePath = path.resolve("../public/alldata.json" );
     console.log('%cServer Event Handler', 'color: #00ff00;font-size: 20px;');
     console.log(allDataFilePath);
     console.log(__dirname);
+    if(getQuery(event).test == 'true'){
+      return {
+        allDataFilePath,
+        __dirname
+      }
+    }
 
     // if (event.req.method === 'GET') {
     //   return getAllData();
