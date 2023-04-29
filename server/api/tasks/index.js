@@ -52,7 +52,7 @@ export default defineEventHandler(async (event) => {
 
 
 async function getAllData(){
-  const allDataFilePath = path.resolve( __dirname, "../../public/alldata.json" );
+  const allDataFilePath = path.resolve( __dirname, "../public/alldata.json" );
   return new Promise((resolve, reject) => {
     fs.readFile(allDataFilePath, (err, data) => {
       if (err) {
