@@ -108,6 +108,7 @@
     </div>
 
 
+    </ShowLogs> -->
   </div>
 </template>
 
@@ -128,6 +129,33 @@ export default {
       isTableLoading: true,
     }
   },
+  setup(){
+    // TODO: seo metas to be defined
+    useSeoMeta({
+      description: '[description]',
+      ogTitle: '[og:title]',
+      ogDescription: '[og:description]',
+      ogImage: '[og:image]',
+      ogUrl: '[og:url]',
+      twitterTitle: '[twitter:title]',
+      twitterDescription: '[twitter:description]',
+      twitterImage: '[twitter:image]',
+      twitterCard: 'summary'
+    })
+
+    useHead({
+      htmlAttrs: {
+        lang: 'en'
+      },
+      link: [
+        {
+          rel: 'icon',
+          type: 'image/png',
+          href: '/favicon.png'
+        }
+      ]
+    })
+  },
   async mounted() {
     await nextTick();
     const allData = await this.getAlldata()
@@ -135,8 +163,9 @@ export default {
     this.isTableLoading = false;
   },
   methods: {
-    showTaskLogs() {
+    showTaskLogs(task_id) {
       const allData = this.getAlldata();
+      // this.show_task_logs = allData.task_logs.filter((task_log) => task_log.task_id === task_id);
     },
     formatDate(dateString) {
       const date = new Date(dateString);
@@ -163,6 +192,11 @@ export default {
       this.tasks = allData.tasks
       this.task_logs = allData.task_logs
       this.allData = allData
+
+      // TODO: fordev use only
+      // this.show_task_logs = this.task_logs.filter((task_log) => task_log.task_id === 1);
+      // const show_task_logs = this.task_logs.filter((task_log) => task_log.task_id === 1);
+      // this.show_task_logs = JSON.parse(JSON.stringify(show_task_logs));
     },
     async getAlldata() {
       return (await useFetch('/api/tasks/')).data.value
@@ -198,7 +232,11 @@ export default {
       await this.updateAlldata(alldata)
     },
     async addTask() {
-      const user_tasks_index = this.tasks.findIndex(t => t[this.selected_user_id])
+      let user_tasks_index = this.tasks.findIndex(t => t[this.selected_user_id])
+      if(user_tasks_index === -1) {
+        this.tasks.push({ [this.selected_user_id]: [] })
+        user_tasks_index = this.tasks.findIndex(t => t[this.selected_user_id])
+      }
       const new_task = {
         user_id: this.selected_user.id,
         title: this.newTask.title,
@@ -210,6 +248,9 @@ export default {
         id: maxId + 1,
         user_id: new_task.user_id,
         title: new_task.title,
+      }
+      if(!this.tasks[user_tasks_index]) {
+        this.tasks[user_tasks_index] = {}
       }
       this.tasks[user_tasks_index][this.selected_user_id].push(task);
       alldata.tasks = this.tasks;
