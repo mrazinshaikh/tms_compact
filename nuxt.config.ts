@@ -11,7 +11,8 @@ export default defineNuxtConfig({
   ],
 
   devtools: {
-    enabled: false
+    enabled: true,
+    reuseExistingServer: true,
   },
 
   vite: {

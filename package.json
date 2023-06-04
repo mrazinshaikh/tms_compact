@@ -10,13 +10,13 @@
     "start2": "export NITRO_HOST=0.0.0.0 && node .output/server/index.mjs",
     "start": "node .output/server/index.mjs"
   },
-  "devDependencies": {
-    "@nuxt/devtools": "^0.4.0",
-    "@nuxtjs/tailwindcss": "^6.6.6",
-    "nuxt": "^3.4.1"
-  },
   "dependencies": {
+    "@nuxtjs/tailwindcss": "^6.6.6",
     "path-browserify": "^1.0.1",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.0",
+    "nuxt": "^3.5.2"
+  },
+  "devDependencies": {
+    "@nuxt/devtools": "^0.5.5"
   }
 }

@@ -21,6 +21,20 @@
           "id": 2,
           "user_id": 1,
           "title": "Task two"
+        },
+        {
+          "id": 3,
+          "user_id": 1,
+          "title": "User 1 task 3"
+        }
+      ]
+    },
+    {
+      "2": [
+        {
+          "id": null,
+          "user_id": 2,
+          "title": "user 2 task 1"
         }
       ]
     }
